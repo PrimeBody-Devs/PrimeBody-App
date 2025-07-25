@@ -1,11 +1,13 @@
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Modal, ModalContent, ModalDescription, ModalHeader, ModalTitle, ModalTrigger } from '@/components/ui/modal';
+// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+// import { Modal, ModalContent, ModalDescription, ModalHeader, ModalTitle, ModalTrigger } from '@/components/ui/modal';
 import { APP_CONFIG } from '@/lib/constants';
 import { typographyClasses } from '@/lib/typography';
 import { sectionSpacing } from '@/lib/spacing';
-import { Heart, Zap, Users, Trophy, Play, Smartphone, BarChart, Award, Users as UsersIcon } from 'lucide-react';
+// import { Heart, Zap, Users, Trophy, Play, Smartphone, BarChart, Award, Users as UsersIcon } from 'lucide-react';
+import { Zap, Users, Play, Smartphone, BarChart, Award, Users as UsersIcon } from 'lucide-react';
 import { Carousel } from '@/components/ui/carousel';
 
 export default function Home() {

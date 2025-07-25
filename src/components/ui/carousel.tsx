@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 interface CarouselProps {
   items: {
@@ -31,15 +32,16 @@ export function Carousel({ items, autoPlay = true, interval = 5000 }: CarouselPr
     setCurrentIndex(index);
   };
 
+  // Remove nextSlide from dependencies by moving logic inline
   useEffect(() => {
     if (!autoPlay || isPaused) return;
     
     const timer = setInterval(() => {
-      nextSlide();
+      setCurrentIndex((prevIndex) => (prevIndex === items.length - 1 ? 0 : prevIndex + 1));
     }, interval);
 
     return () => clearInterval(timer);
-  }, [currentIndex, isPaused]);
+  }, [autoPlay, isPaused, interval, items.length]);
 
   return (
     <div 
@@ -52,17 +54,17 @@ export function Carousel({ items, autoPlay = true, interval = 5000 }: CarouselPr
         className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {items.map((item, index) => (
+        {items.map((item) => (
           <div key={item.id} className="w-full flex-shrink-0">
             <div className="relative aspect-video overflow-hidden rounded-xl bg-muted/50">
-              <img
+              <Image
                 src={item.image}
                 alt={item.title}
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-6 flex flex-col justify-end">
                 <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                <p className="text-muted-foreground text-white/90">{item.description}</p>
+                <p className="text-muted-foreground">{item.description}</p>
               </div>
             </div>
           </div>
