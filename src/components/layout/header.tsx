@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { WalletConnectButton } from '@/components/web3/wallet-connect-button';
 import { APP_CONFIG } from '@/lib/constants';
 import { Menu, X, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -87,9 +88,12 @@ export function Header({ isScrolled: propIsScrolled, className }: HeaderProps) {
             
             {/* Desktop CTA */}
             <div className="hidden sm:block">
-              <Button size="sm" className="font-medium">
-                Comenzar Desafío
-              </Button>
+              <div className="flex items-center gap-2">
+                <WalletConnectButton />
+                <Button variant="outline" size="sm" className="hidden sm:inline-flex">
+                  Iniciar prueba
+                </Button>
+              </div>
             </div>
 
             {/* Mobile menu button */}

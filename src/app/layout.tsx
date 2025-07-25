@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/providers/theme-provider';
+import { Web3Provider } from '@/components/providers/web3-provider';
 import { APP_CONFIG, SEO_CONFIG, THEME_CONFIG } from '@/lib/constants';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
@@ -38,17 +39,19 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <ThemeProvider
-          attribute={THEME_CONFIG.attribute}
-          defaultTheme={THEME_CONFIG.defaultTheme}
-          enableSystem
-          disableTransitionOnChange={false}
-          storageKey={THEME_CONFIG.storageKey}
-        >
-          <Header />
-          {children}
-          <Footer />
-        </ThemeProvider>
+        <Web3Provider>
+          <ThemeProvider
+            attribute={THEME_CONFIG.attribute}
+            defaultTheme={THEME_CONFIG.defaultTheme}
+            enableSystem
+            disableTransitionOnChange={false}
+            storageKey={THEME_CONFIG.storageKey}
+          >
+            <Header />
+            {children}
+            <Footer />
+          </ThemeProvider>
+        </Web3Provider>
       </body>
     </html>
   );
