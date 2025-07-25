@@ -1,36 +1,142 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FitCast Challenges - Landing Page
 
-## Getting Started
+Una landing page profesional para la Mini App de Farcaster que combina fitness con recompensas crypto reales.
 
-First, run the development server:
+## 🚀 Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 14** con App Router y TypeScript
+- **Tailwind CSS** con design system personalizado
+- **Framer Motion** para animaciones suaves
+- **Dark/Light Mode** con persistencia
+- **Responsive Design** mobile-first
+- **SEO Optimizado** con meta tags completos
+- **Performance** optimizado para Lighthouse 90+
+
+## 🛠️ Stack Tecnológico
+
+- **Framework**: Next.js 14
+- **Lenguaje**: TypeScript
+- **Estilos**: Tailwind CSS
+- **Animaciones**: Framer Motion
+- **Temas**: next-themes
+- **Iconos**: Lucide React
+- **Linting**: ESLint + Prettier
+
+## 📁 Estructura del Proyecto
+
+```
+src/
+├── app/                 # App Router (Next.js 14)
+├── components/          # Componentes React
+│   ├── layout/         # Header, Footer, Navigation
+│   ├── sections/       # Hero, Features, Demo, CTA
+│   ├── ui/            # Button, Card, Modal
+│   └── icons/         # Iconos personalizados
+├── lib/               # Utilidades y configuración
+├── types/             # Tipos TypeScript
+└── styles/            # Estilos globales
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Inicio Rápido
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Instalar dependencias**:
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Configurar variables de entorno**:
+   ```bash
+   cp .env.local.example .env.local
+   ```
 
-## Learn More
+3. **Ejecutar en desarrollo**:
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Abrir en el navegador**:
+   ```
+   http://localhost:3000
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 Scripts Disponibles
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `npm run dev` - Servidor de desarrollo
+- `npm run build` - Build de producción
+- `npm run start` - Servidor de producción
+- `npm run lint` - Ejecutar ESLint
+- `npm run lint:fix` - Corregir errores de ESLint
+- `npm run format` - Formatear código con Prettier
+- `npm run type-check` - Verificar tipos TypeScript
+- `npm run clean` - Limpiar archivos de build
 
-## Deploy on Vercel
+## 🎨 Design System
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Colores
+- **Primary**: Azul (#3b82f6)
+- **Accent**: Verde (#10b981)
+- **Background**: Dinámico según tema
+- **Surface**: Superficies elevadas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Tipografía
+- **Font Family**: Inter (sans-serif)
+- **Scale**: 12px - 48px con line-heights optimizados
+
+### Espaciado
+- **Sistema**: 4px base unit
+- **Breakpoints**: sm(640px), md(768px), lg(1024px), xl(1280px)
+
+## 🔧 Configuración
+
+### Temas
+El proyecto soporta dark/light mode automático con:
+- Detección de preferencia del sistema
+- Toggle manual
+- Persistencia en localStorage
+
+### SEO
+Configuración completa de meta tags:
+- Open Graph para redes sociales
+- Twitter Cards
+- Structured Data
+- Sitemap automático
+
+### Performance
+Optimizaciones incluidas:
+- Code splitting automático
+- Image optimization
+- Font optimization
+- CSS purging
+
+## 🚀 Deployment
+
+### Vercel (Recomendado)
+```bash
+npm run build
+vercel --prod
+```
+
+### Otros Proveedores
+```bash
+npm run build
+npm run start
+```
+
+## 🤝 Contribución
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
+
+## 🔗 Enlaces
+
+- [Farcaster](https://farcaster.xyz/)
+- [Base](https://base.org/)
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
