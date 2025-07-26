@@ -1,20 +1,29 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useWeb3 } from '@/components/providers/web3-provider';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
-import { Check, Copy, ExternalLink, LogOut, Wallet } from 'lucide-react';
+import { Check, Copy, ExternalLink, LogOut, Wallet, AlertTriangle, RefreshCw } from 'lucide-react';
 import { useAccount, useConnect, useDisconnect, useEnsName } from 'wagmi';
+import { 
+  formatAddress, 
+  getExplorerUrl, 
+  getCurrentNetwork, 
+  getNetworkDisplayName,
+  switchToBaseNetwork
+} from '@/lib/web3-utils';
 
 export function WalletConnectButton() {
-  const { isConnected, address } = useWeb3();
+  const { address, isConnected } = useAccount();
   const { connect, connectors, error, isPending } = useConnect();
   const { disconnect } = useDisconnect();
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
   const [open, setOpen] = useState(false);
+  const [currentNetwork, setCurrentNetwork] = useState<'mainnet' | 'testnet' | null>(null);
+  const [isSwitchingNetwork, setIsSwitchingNetwork] = useState(false);
   const { data: ensName } = useEnsName({ address });
 
   useEffect(() => {
@@ -28,18 +37,61 @@ export function WalletConnectButton() {
     }
   }, [copied]);
 
-  const formatAddress = (addr: string) => {
-    return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
-  };
+  // Check current network
+  useEffect(() => {
+    const checkNetwork = async () => {
+      if (isConnected) {
+        const network = await getCurrentNetwork();
+        setCurrentNetwork(network);
+      }
+    };
+    
+    checkNetwork();
+  }, [isConnected]);
 
-  const copyToClipboard = () => {
+  const copyToClipboard = async () => {
     if (!address) return;
-    navigator.clipboard.writeText(address);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(address);
+      setCopied(true);
+    } catch (error) {
+      console.error('Failed to copy address:', error);
+    }
   };
 
   const viewOnExplorer = () => {
-    window.open(`https://basescan.org/address/${address}`, '_blank');
+    if (!address) return;
+    const url = getExplorerUrl('address', address, currentNetwork || 'mainnet');
+    window.open(url, '_blank');
+  };
+
+  const handleSwitchToBase = async () => {
+    setIsSwitchingNetwork(true);
+    try {
+      const success = await switchToBaseNetwork();
+      if (success) {
+        setCurrentNetwork('mainnet');
+      }
+    } catch (error) {
+      console.error('Failed to switch network:', error);
+    } finally {
+      setIsSwitchingNetwork(false);
+    }
+  };
+
+  const handleDisconnect = () => {
+    disconnect();
+    setOpen(false);
+    setCurrentNetwork(null);
+  };
+
+  const handleConnect = async (connector: any) => {
+    try {
+      await connect({ connector });
+      setOpen(false);
+    } catch (error) {
+      console.error('Connection error:', error);
+    }
   };
 
   if (!mounted) {
@@ -70,15 +122,14 @@ export function WalletConnectButton() {
                 key={connector.uid}
                 variant="outline"
                 className="w-full justify-start gap-3 py-6 text-base"
-                onClick={() => {
-                  connect({ connector });
-                  setOpen(false);
-                }}
+                onClick={() => handleConnect(connector as any)}
                 disabled={!connector.ready || isPending}
               >
-                <img
+                <Image
                   src={`/wallets/${connector.id}.svg`}
                   alt={connector.name}
+                  width={24}
+                  height={24}
                   className="h-6 w-6"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
@@ -99,10 +150,17 @@ export function WalletConnectButton() {
               </Button>
             ))}
             {error && (
-              <div className="text-sm text-destructive">
+              <div className="flex items-center gap-2 text-sm text-destructive">
+                <AlertTriangle className="h-4 w-4" />
                 {error.message.includes('User rejected') 
                   ? 'Connection rejected. Please try again.' 
                   : 'Failed to connect. Please try again.'}
+              </div>
+            )}
+            {isPending && (
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <RefreshCw className="h-4 w-4 animate-spin" />
+                Connecting...
               </div>
             )}
           </div>
@@ -131,10 +189,7 @@ export function WalletConnectButton() {
                 variant="ghost" 
                 size="sm" 
                 className="text-muted-foreground hover:text-foreground"
-                onClick={() => {
-                  disconnect();
-                  setOpen(false);
-                }}
+                onClick={handleDisconnect}
               >
                 <LogOut className="mr-1 h-4 w-4" />
                 Disconnect
@@ -179,10 +234,33 @@ export function WalletConnectButton() {
             <div className="text-sm font-medium">Network</div>
             <div className="flex items-center justify-between rounded-lg border p-3">
               <div className="flex items-center space-x-2">
-                <div className="h-2 w-2 rounded-full bg-green-500" />
-                <span>Base</span>
+                <div className={cn(
+                  "h-2 w-2 rounded-full",
+                  currentNetwork === 'mainnet' ? 'bg-green-500' : 'bg-yellow-500'
+                )} />
+                <span>{currentNetwork ? getNetworkDisplayName(currentNetwork) : 'Unknown Network'}</span>
               </div>
-              <div className="text-sm text-muted-foreground">Connected</div>
+              <div className="flex items-center space-x-2">
+                {currentNetwork !== 'mainnet' && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleSwitchToBase}
+                    disabled={isSwitchingNetwork}
+                    className="text-xs"
+                  >
+                    {isSwitchingNetwork ? (
+                      <RefreshCw className="mr-1 h-3 w-3 animate-spin" />
+                    ) : (
+                      <AlertTriangle className="mr-1 h-3 w-3" />
+                    )}
+                    Switch to Base
+                  </Button>
+                )}
+                {currentNetwork === 'mainnet' && (
+                  <div className="text-sm text-green-600">Connected</div>
+                )}
+              </div>
             </div>
           </div>
         </div>

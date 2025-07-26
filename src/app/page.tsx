@@ -1,4 +1,3 @@
-import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { Button } from '@/components/ui/button';
 // import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,18 +12,6 @@ import { Carousel } from '@/components/ui/carousel';
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Header with theme toggle */}
-      <header className="border-b border-border">
-        <div className={`${sectionSpacing.container} py-4`}>
-          <div className="flex items-center justify-between">
-            <h1 className="text-xl font-bold text-primary">
-              {APP_CONFIG.name}
-            </h1>
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
-
       {/* Main content */}
       <main className={`${sectionSpacing.section} relative overflow-hidden`}>
         {/* Decorative elements */}
@@ -184,25 +171,25 @@ export default function Home() {
                     id: 1,
                     title: 'Seguimiento en Tiempo Real',
                     description: 'Monitorea tu progreso con estadísticas detalladas y actualizaciones en vivo',
-                    image: '/images/dashboard-preview.jpg',
+                    image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop',
                   },
                   {
                     id: 2,
                     title: 'Entrenamientos Personalizados',
                     description: 'Planes de entrenamiento adaptados a tus objetivos y nivel de condición física',
-                    image: '/images/workout-preview.jpg',
+                    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop',
                   },
                   {
                     id: 3,
                     title: 'Comunidad Activa',
                     description: 'Conéctate con otros usuarios y participa en desafíos grupales',
-                    image: '/images/community-preview.jpg',
+                    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop',
                   },
                   {
                     id: 4,
                     title: 'Gana Recompensas',
                     description: 'Obtén tokens PRIME por alcanzar tus metas de acondicionamiento físico',
-                    image: '/images/rewards-preview.jpg',
+                    image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop',
                   },
                 ]}
                 autoPlay={true}

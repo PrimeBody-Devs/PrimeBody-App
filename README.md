@@ -46,7 +46,19 @@ src/
 
 2. **Configurar variables de entorno**:
    ```bash
-   cp .env.local.example .env.local
+   # Create .env.local file
+   touch .env.local
+   ```
+   
+   Add the following to your `.env.local`:
+   ```env
+   # WalletConnect Configuration (Optional)
+   # Get your project ID from https://cloud.walletconnect.com/
+   NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id_here
+   
+   # App Configuration
+   NEXT_PUBLIC_APP_NAME=FitCast
+   NEXT_PUBLIC_APP_URL=http://localhost:3000
    ```
 
 3. **Ejecutar en desarrollo**:
@@ -107,6 +119,41 @@ Optimizaciones incluidas:
 - Image optimization
 - Font optimization
 - CSS purging
+
+### Web3 Configuration
+El proyecto incluye integración con Web3 siguiendo las mejores prácticas de Base:
+
+#### **Tecnologías**
+- **Wagmi v2** - Biblioteca moderna para interacción con Ethereum
+- **Viem** - Cliente TypeScript para transacciones y contratos
+- **Base Network** - Red principal (mainnet y testnet soportados)
+- **WalletConnect v2** - Conexión móvil (opcional)
+- **MetaMask** y **Coinbase Wallet** - Wallets soportados
+
+#### **Características**
+- ✅ **Detección automática de red** - Detecta si el usuario está en Base
+- ✅ **Cambio de red automático** - Botón para cambiar a Base si está en otra red
+- ✅ **Validación de direcciones** - Verificación de formato de direcciones
+- ✅ **Formateo de balances** - Manejo correcto de decimales y precision
+- ✅ **Explorer integration** - Enlaces directos a Basescan
+- ✅ **Error handling** - Manejo robusto de errores de conexión
+- ✅ **SSR compatible** - Funciona con Server-Side Rendering
+
+#### **Configuración**
+```env
+# WalletConnect (opcional)
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id_here
+
+# App Configuration
+NEXT_PUBLIC_APP_NAME=FitCast
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+#### **Notas**
+- **Desarrollo**: Solo MetaMask disponible para evitar errores de COOP
+- **Producción**: Todos los wallets disponibles
+- **WalletConnect**: Opcional, requiere project ID de cloud.walletconnect.com
+- **Redes**: Soporte completo para Base mainnet y testnet
 
 ## 🚀 Deployment
 

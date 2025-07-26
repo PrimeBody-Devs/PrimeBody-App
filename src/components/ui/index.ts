@@ -28,3 +28,16 @@ export {
 export type { ModalContentProps } from './modal';
 
 export { ThemeToggle } from './theme-toggle';
+
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogClose,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from './dialog';

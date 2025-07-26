@@ -60,6 +60,8 @@ export function Carousel({ items, autoPlay = true, interval = 5000 }: CarouselPr
               <Image
                 src={item.image}
                 alt={item.title}
+                width={800}
+                height={600}
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-6 flex flex-col justify-end">
