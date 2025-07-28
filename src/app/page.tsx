@@ -169,27 +169,27 @@ export default function Home() {
                 items={[
                   {
                     id: 1,
-                    title: 'Seguimiento en Tiempo Real',
-                    description: 'Monitorea tu progreso con estadísticas detalladas y actualizaciones en vivo',
-                    image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop',
+                    title: 'Ejercicio 1',
+                    description: 'Entrenamiento de fuerza y resistencia para todos los niveles',
+                    image: '/images/carousel/Ejercicio1.jpg',
                   },
                   {
                     id: 2,
-                    title: 'Entrenamientos Personalizados',
-                    description: 'Planes de entrenamiento adaptados a tus objetivos y nivel de condición física',
-                    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop',
+                    title: 'Ejercicio 2',
+                    description: 'Rutinas personalizadas para alcanzar tus objetivos',
+                    image: '/images/carousel/Ejercicio2.jpg',
                   },
                   {
                     id: 3,
-                    title: 'Comunidad Activa',
-                    description: 'Conéctate con otros usuarios y participa en desafíos grupales',
-                    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop',
+                    title: 'Ejercicio 3',
+                    description: 'Técnicas avanzadas para mejorar tu rendimiento',
+                    image: '/images/carousel/Ejercicio3.jpg',
                   },
                   {
                     id: 4,
-                    title: 'Gana Recompensas',
-                    description: 'Obtén tokens PRIME por alcanzar tus metas de acondicionamiento físico',
-                    image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop',
+                    title: 'Ejercicio 4',
+                    description: 'Entrenamientos diseñados para resultados óptimos',
+                    image: '/images/carousel/Ejercicio4.jpg',
                   },
                 ]}
                 autoPlay={true}
