@@ -15,9 +15,10 @@ interface HeaderProps {
 }
 
 const navigationLinks = [
-  { href: '#features', label: 'Características' },
-  { href: '#demo', label: 'Demo' },
-  { href: '#about', label: 'Acerca de' },
+  { href: '/', label: 'Inicio' },
+  { href: '/desafios', label: 'Desafíos' },
+  { href: '/comunidad', label: 'Comunidad' },
+  { href: '/precios', label: 'Precios' },
 ] as const;
 
 export function Header({ isScrolled: propIsScrolled, className }: HeaderProps) {
@@ -46,74 +47,54 @@ export function Header({ isScrolled: propIsScrolled, className }: HeaderProps) {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 w-full border-b border-border/40 transition-all duration-300',
+        'sticky top-0 z-50 w-full border-b border-border/40 transition-all duration-300 backdrop-blur-sm',
         isScrolled
           ? 'bg-background/80 backdrop-blur-md shadow-sm'
           : 'bg-background/60',
         className
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo/Brand */}
-          <Link
-            href="/"
-            className="flex items-center space-x-2 transition-opacity hover:opacity-80"
-            onClick={closeMobileMenu}
-          >
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent">
-              <Zap className="h-5 w-5 text-white" />
-            </div>
-            <span className="text-xl font-bold text-foreground">
-              {APP_CONFIG.name}
-            </span>
+      <div className="container flex h-16 items-center justify-between px-4 sm:px-6">
+        <div className="flex items-center gap-8">
+          <Link href="/" className="flex items-center space-x-2">
+            <Zap className="h-6 w-6 text-primary" />
+            <span className="text-xl font-bold">{APP_CONFIG.name}</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
             {navigationLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors px-3 py-2 rounded-md hover:bg-accent/50"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
+        </div>
 
-          {/* Right side - Theme Toggle + CTA */}
-          <div className="flex items-center space-x-4">
-            <ThemeToggle />
-            
-            {/* Desktop CTA */}
-            <div className="hidden sm:block">
-              <div className="flex items-center gap-2">
-                <WalletConnectButton />
-                <Button variant="outline" size="sm" className="hidden sm:inline-flex">
-                  Iniciar prueba
-                </Button>
-              </div>
-            </div>
-
-            {/* Mobile menu button */}
-            <button
-              onClick={toggleMobileMenu}
-              className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-              aria-label="Abrir menú de navegación"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </button>
-          </div>
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+          <WalletConnectButton />
+          
+          {/* Mobile menu button */}
+          <button
+            onClick={toggleMobileMenu}
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+            aria-label="Abrir menú de navegación"
+          >
+            {isMobileMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </button>
         </div>
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-sm">
+          <div className="absolute top-16 left-0 right-0 md:hidden border-t border-border/40 bg-background/95 backdrop-blur-sm">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigationLinks.map((link) => (
                 <Link

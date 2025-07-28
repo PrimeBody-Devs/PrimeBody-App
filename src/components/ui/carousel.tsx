@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, TouchEvent } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
@@ -19,6 +19,10 @@ interface CarouselProps {
 export function Carousel({ items, autoPlay = true, interval = 5000 }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const minSwipeDistance = 50; // Minimum distance for swipe to be considered
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex === items.length - 1 ? 0 : prevIndex + 1));
@@ -30,6 +34,25 @@ export function Carousel({ items, autoPlay = true, interval = 5000 }: CarouselPr
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
+  };
+
+  // Touch event handlers for swipe
+  const onTouchStart = (e: TouchEvent) => {
+    setTouchEnd(0);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: TouchEvent) => setTouchEnd(e.targetTouches[0].clientX);
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) nextSlide();
+    if (isRightSwipe) prevSlide();
   };
 
   // Remove nextSlide from dependencies by moving logic inline
@@ -45,25 +68,33 @@ export function Carousel({ items, autoPlay = true, interval = 5000 }: CarouselPr
 
   return (
     <div 
-      className="relative w-full overflow-hidden rounded-xl"
+      ref={carouselRef}
+      className="relative w-full overflow-hidden rounded-xl touch-pan-x"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
     >
       {/* Carousel container */}
       <div 
         className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {items.map((item) => (
+        {items.map((item, index) => (
           <div key={item.id} className="w-full flex-shrink-0">
             <div className="relative aspect-video overflow-hidden rounded-xl bg-muted/50">
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={800}
-                height={600}
-                className="h-full w-full object-cover"
-              />
+              <div className="relative w-full h-full">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  className="object-cover"
+                  priority={index === 0} // Only preload first image
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-6 flex flex-col justify-end">
                 <h3 className="text-xl font-bold text-white">{item.title}</h3>
                 <p className="text-muted-foreground">{item.description}</p>
@@ -76,17 +107,17 @@ export function Carousel({ items, autoPlay = true, interval = 5000 }: CarouselPr
       {/* Navigation buttons */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-2 text-foreground shadow-md backdrop-blur-sm transition-all hover:bg-white hover:scale-110"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-2 text-foreground shadow-md backdrop-blur-sm transition-all hover:bg-white hover:scale-110 active:scale-95"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="h-6 w-6" />
+        <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-2 text-foreground shadow-md backdrop-blur-sm transition-all hover:bg-white hover:scale-110"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-2 text-foreground shadow-md backdrop-blur-sm transition-all hover:bg-white hover:scale-110 active:scale-95"
         aria-label="Next slide"
       >
-        <ChevronRight className="h-6 w-6" />
+        <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
       </button>
 
       {/* Indicators */}
@@ -96,10 +127,11 @@ export function Carousel({ items, autoPlay = true, interval = 5000 }: CarouselPr
             key={index}
             onClick={() => goToSlide(index)}
             className={cn(
-              'h-2 w-8 rounded-full transition-all',
-              currentIndex === index ? 'bg-white w-8' : 'bg-white/50 w-4'
+              'h-1.5 sm:h-2 rounded-full transition-all touch-manipulation',
+              currentIndex === index ? 'bg-white w-6 sm:w-8' : 'bg-white/50 w-3 sm:w-4'
             )}
-            aria-label={`Go to slide ${index + 1}`}
+            aria-label={`Ir a la diapositiva ${index + 1}`}
+            aria-current={currentIndex === index ? 'step' : undefined}
           />
         ))}
       </div>
