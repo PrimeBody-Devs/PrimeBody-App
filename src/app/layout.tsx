@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   openGraph: {
     ...SEO_CONFIG.openGraph,
     images: [...SEO_CONFIG.openGraph.images],
+    // Fix alternateLocale if present
+    ...(SEO_CONFIG.openGraph.alternateLocale && {
+      alternateLocale: [...SEO_CONFIG.openGraph.alternateLocale],
+    }),
   },
   twitter: {
     ...SEO_CONFIG.twitter,

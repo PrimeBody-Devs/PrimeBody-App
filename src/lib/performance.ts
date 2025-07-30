@@ -27,6 +27,7 @@ export const trackWebVitals = () => {
       });
       
       observer.observe({ entryTypes: ['largest-contentful-paint'] });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       console.warn('LCP observation not supported');
     }
@@ -37,16 +38,19 @@ export const trackWebVitals = () => {
     try {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry: any) => {
-          analytics.performance('FID', entry.processingStart - entry.startTime, 'ms');
-          
-          if (entry.processingStart - entry.startTime > 100) {
-            analytics.error(`FID too slow: ${entry.processingStart - entry.startTime}ms`, 'performance', false);
+        entries.forEach((entry) => {
+          if (entry.entryType === 'first-input') {
+            const eventTiming = entry as PerformanceEventTiming;
+            analytics.performance('FID', eventTiming.processingStart - eventTiming.startTime, 'ms');
+            if (eventTiming.processingStart - eventTiming.startTime > 100) {
+              analytics.error(`FID too slow: ${eventTiming.processingStart - eventTiming.startTime}ms`, 'performance', false);
+            }
           }
         });
       });
       
       observer.observe({ entryTypes: ['first-input'] });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       console.warn('FID observation not supported');
     }
@@ -58,8 +62,11 @@ export const trackWebVitals = () => {
       let clsValue = 0;
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry: any) => {
+        entries.forEach((entry: PerformanceEntry) => {
+          // entry is actually a LayoutShift entry, but PerformanceEntry is the base type
+          // @ts-expect-error: hadRecentInput and value are specific to LayoutShift
           if (!entry.hadRecentInput) {
+            // @ts-expect-error: value is specific to LayoutShift
             clsValue += entry.value;
           }
         });
@@ -72,6 +79,7 @@ export const trackWebVitals = () => {
       });
       
       observer.observe({ entryTypes: ['layout-shift'] });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       console.warn('CLS observation not supported');
     }
@@ -125,10 +133,17 @@ export const trackResourcePerformance = () => {
 };
 
 // Memory usage tracking
+interface PerformanceMemory {
+  usedJSHeapSize: number;
+  totalJSHeapSize: number;
+  jsHeapSizeLimit: number;
+}
+
 export const trackMemoryUsage = () => {
   if (typeof window === 'undefined' || !('memory' in performance)) return;
 
-  const memory = (performance as any).memory;
+  const memory = (performance as { memory?: PerformanceMemory }).memory;
+  if (!memory) return;
   
   analytics.performance('Used JS Heap Size', memory.usedJSHeapSize / 1024 / 1024, 'MB');
   analytics.performance('Total JS Heap Size', memory.totalJSHeapSize / 1024 / 1024, 'MB');
@@ -145,23 +160,26 @@ export const trackMemoryUsage = () => {
 export const trackConnectionQuality = () => {
   if (typeof window === 'undefined' || !('connection' in navigator)) return;
 
-  const connection = (navigator as any).connection;
+  interface NetworkInformation {
+    downlink: number;
+    effectiveType: string;
+    rtt: number;
+    saveData?: boolean;
+    onchange?: () => void;
+  }
+
+  const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection;
   
   if (connection) {
     analytics.performance('Connection Downlink', connection.downlink, 'Mbps');
     analytics.performance('Connection RTT', connection.rtt, 'ms');
     
     // Track connection type
-    analytics.trackEvent({
-      action: 'connection_type',
-      category: 'performance',
-      label: connection.effectiveType,
-      custom_parameters: {
-        downlink: connection.downlink,
-        rtt: connection.rtt,
-        saveData: connection.saveData,
-      },
-    });
+    analytics.performance(
+      'Connection Type',
+      0,
+      connection.effectiveType
+    );
   }
 };
 

@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { RegistrationForm } from '@/components/auth/registration-form';
+// import { RegistrationForm } from '@/components/auth/registration-form';
 import Link from 'next/link';
 import { APP_CONFIG } from '@/lib/constants';
 import { typographyClasses } from '@/lib/typography';
 import { sectionSpacing } from '@/lib/spacing';
-import { Zap, Play, Smartphone, BarChart, Award, Users as UsersIcon, Users, Star, TrendingUp, Shield, Heart } from 'lucide-react';
+// import { Zap, Play, Smartphone, BarChart, Award, Users as UsersIcon, Users, Star, TrendingUp, Shield, Heart } from 'lucide-react';
+import { Zap, Play, Smartphone, BarChart, Award, Users as UsersIcon, Users, Star } from 'lucide-react';
 import { Carousel } from '@/components/ui/carousel';
 
 export default function Home() {
