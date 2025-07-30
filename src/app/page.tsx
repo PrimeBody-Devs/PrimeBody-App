@@ -1,12 +1,11 @@
 import { Button } from '@/components/ui/button';
-// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-// import { Modal, ModalContent, ModalDescription, ModalHeader, ModalTitle, ModalTrigger } from '@/components/ui/modal';
+import { RegistrationForm } from '@/components/auth/registration-form';
+import Link from 'next/link';
 import { APP_CONFIG } from '@/lib/constants';
 import { typographyClasses } from '@/lib/typography';
 import { sectionSpacing } from '@/lib/spacing';
-// import { Heart, Zap, Users, Trophy, Play, Smartphone, BarChart, Award, Users as UsersIcon } from 'lucide-react';
-import { Zap, Users, Play, Smartphone, BarChart, Award, Users as UsersIcon } from 'lucide-react';
+import { Zap, Play, Smartphone, BarChart, Award, Users as UsersIcon, Users, Star, TrendingUp, Shield, Heart } from 'lucide-react';
 import { Carousel } from '@/components/ui/carousel';
 
 export default function Home() {
@@ -14,53 +13,71 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Main content */}
       <main className={`${sectionSpacing.section} relative overflow-hidden`}>
-        {/* Decorative elements */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-accent/10 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
+        {/* Enhanced Decorative elements */}
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-accent/20 to-primary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-4000"></div>
         
         <div className={`${sectionSpacing.container} relative z-10`}>
-          {/* Hero section */}
-          <div className="grid gap-12 lg:grid-cols-2 items-center py-16">
-            <div className="text-center lg:text-left space-y-6">
-              <div className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary mb-4">
+          {/* Enhanced Hero section */}
+          <div className="grid gap-12 lg:grid-cols-2 items-center py-20">
+            <div className="text-center lg:text-left space-y-8">
+              <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-primary/10 to-accent/10 text-primary mb-4 border border-primary/20 backdrop-blur-sm">
                 <span className="relative flex h-2 w-2 mr-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
-                ¡Nuevos desafíos cada semana!
+                🔥 New challenges every week!
               </div>
               
-              <h1 className={`${typographyClasses.h1} text-balance`}>
+              <h1 className={`${typographyClasses.h1} text-balance leading-tight`}>
                 Transforma tu cuerpo con 
-                <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-pulse">
                   FitCast Challenges
                 </span>
               </h1>
               
-              <p className={`${typographyClasses.lead} max-w-xl mx-auto lg:mx-0 lg:pr-8`}>
+              <p className={`${typographyClasses.lead} max-w-xl mx-auto lg:mx-0 lg:pr-8 text-muted-foreground`}>
                 {APP_CONFIG.description}
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-                <Button size="lg" className="group">
-                  Comenzar ahora
-                  <Zap className="ml-2 h-4 w-4 group-hover:animate-pulse" />
-                </Button>
-                <Button variant="outline" size="lg" className="group">
-                  <Play className="mr-2 h-4 w-4 group-hover:text-primary" />
-                  Ver video
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-6">
+                <Link href="/register">
+                  <Button size="lg" className="group bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    🚀 Get Started Now
+                    <Zap className="ml-2 h-4 w-4 group-hover:animate-pulse" />
+                  </Button>
+                </Link>
+                <Button variant="outline" size="lg" className="group border-2 hover:bg-primary/5 transition-all duration-300">
+                  <Play className="mr-2 h-4 w-4 group-hover:text-primary transition-colors" />
+                  Ver Demo
                 </Button>
               </div>
               
-              <div className="flex items-center justify-center lg:justify-start gap-2 pt-4 text-sm text-muted-foreground">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="h-8 w-8 rounded-full border-2 border-background bg-foreground/10 flex items-center justify-center text-xs font-medium">
-                      {i}+K
-                    </div>
-                  ))}
+              {/* Enhanced social proof */}
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 pt-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="h-10 w-10 rounded-full border-2 border-background bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-xs font-bold text-primary shadow-md">
+                        {i}K+
+                      </div>
+                    ))}
+                  </div>
+                  <div className="text-sm">
+                    <div className="font-semibold text-foreground">10K+ Active Users</div>
+                    <div className="text-muted-foreground">Transforming daily</div>
+                  </div>
                 </div>
-                <span>Personas ya están transformando sus vidas</span>
+                <div className="flex items-center gap-1 text-sm">
+                  <div className="flex">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <span className="font-semibold">4.9</span>
+                  <span className="text-muted-foreground">(2.1k reviews)</span>
+                </div>
               </div>
             </div>
             
@@ -83,10 +100,10 @@ export default function Home() {
           <div className="py-20">
             <div className="text-center mb-16">
               <h2 className={`${typographyClasses.h2} mb-4`}>
-                ¿Cómo Revolucionamos tu Entrenamiento?
+                How We&apos;re Revolutionizing Your Workout
               </h2>
               <p className={`${typographyClasses.lead} max-w-2xl mx-auto`}>
-                Descubre las características que hacen de FitCast la plataforma de fitness del futuro
+                Discover the features that make FitCast the fitness platform of the future
               </p>
             </div>
 
@@ -101,7 +118,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Nuestra IA crea planes de entrenamiento personalizados según tus objetivos, nivel de condición física y horario, adaptándose en tiempo real para mantenerte en el camino correcto.
+                    Our AI creates personalized workout plans based on your goals, fitness level, and schedule, adapting in real-time to keep you on the right track.
                   </p>
                 </CardContent>
               </Card>
@@ -116,7 +133,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Sincroniza con Apple Watch, Fitbit o Google Fit para rastrear automáticamente pasos, frecuencia cardíaca y entrenamientos para recompensas verificadas.
+                    Sync with Apple Watch, Fitbit, or Google Fit to automatically track steps, heart rate, and workouts for verified rewards.
                   </p>
                 </CardContent>
               </Card>
@@ -131,7 +148,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Completa entrenamientos o alcanza hitos para ganar tokens PRIME, canjeables por equipo o comerciables en la blockchain de BASE.
+                    Complete workouts or reach milestones to earn PRIME tokens, redeemable for gear or tradable on the BASE blockchain.
                   </p>
                 </CardContent>
               </Card>
@@ -146,7 +163,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Únete a desafíos en equipo, escala las tablas de clasificación y conéctate con una comunidad global para mantenerte motivado y ganar bonificaciones en tokens.
+                    Join team challenges, climb the leaderboards, and connect with a global community to stay motivated and earn token bonuses.
                   </p>
                 </CardContent>
               </Card>
@@ -157,10 +174,10 @@ export default function Home() {
           <div className="py-20 bg-muted/30 rounded-3xl my-16">
             <div className={`${sectionSpacing.container} text-center mb-12`}>
               <h2 className={`${typographyClasses.h2} mb-4`}>
-                Descubre la Experiencia FitCast
+                Discover the FitCast Experience
               </h2>
               <p className={`${typographyClasses.lead} max-w-2xl mx-auto`}>
-                Mira cómo nuestra aplicación transforma tu rutina de ejercicios con tecnología de punta
+                See how our app transforms your workout routine with cutting-edge technology
               </p>
             </div>
 
@@ -169,26 +186,26 @@ export default function Home() {
                 items={[
                   {
                     id: 1,
-                    title: 'Ejercicio 1',
-                    description: 'Entrenamiento de fuerza y resistencia para todos los niveles',
+                    title: 'Workout 1',
+                    description: 'Strength and endurance training for all levels',
                     image: '/images/carousel/Ejercicio1.jpg',
                   },
                   {
                     id: 2,
-                    title: 'Ejercicio 2',
-                    description: 'Rutinas personalizadas para alcanzar tus objetivos',
+                    title: 'Workout 2',
+                    description: 'Customized routines to achieve your goals',
                     image: '/images/carousel/Ejercicio2.jpg',
                   },
                   {
                     id: 3,
-                    title: 'Ejercicio 3',
-                    description: 'Técnicas avanzadas para mejorar tu rendimiento',
+                    title: 'Workout 3',
+                    description: 'Advanced techniques to improve your performance',
                     image: '/images/carousel/Ejercicio3.jpg',
                   },
                   {
                     id: 4,
-                    title: 'Ejercicio 4',
-                    description: 'Entrenamientos diseñados para resultados óptimos',
+                    title: 'Workout 4',
+                    description: 'Workouts designed for optimal results',
                     image: '/images/carousel/Ejercicio4.jpg',
                   },
                 ]}

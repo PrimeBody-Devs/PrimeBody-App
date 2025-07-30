@@ -39,7 +39,7 @@ export function MobileNav() {
         variant="ghost"
         size="icon"
         onClick={() => setIsOpen(!isOpen)}
-        aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
         className="h-10 w-10"
       >
         {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -54,34 +54,34 @@ export function MobileNav() {
                 className="text-foreground/80 hover:text-foreground transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Inicio
+                Home
               </Link>
               <Link 
-                href="/desafios" 
+                href="/challenges" 
                 className="text-foreground/80 hover:text-foreground transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Desafíos
+                Challenges
               </Link>
               <Link 
-                href="/comunidad" 
+                href="/community" 
                 className="text-foreground/80 hover:text-foreground transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Comunidad
+                Community
               </Link>
               <Link 
-                href="/precios" 
+                href="/pricing" 
                 className="text-foreground/80 hover:text-foreground transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Precios
+                Pricing
               </Link>
             </nav>
             
             <div className="pt-8 border-t border-border w-full max-w-xs">
               <Button className="w-full" size="lg" onClick={() => setIsOpen(false)}>
-                Comenzar ahora
+                Get Started
               </Button>
             </div>
           </div>

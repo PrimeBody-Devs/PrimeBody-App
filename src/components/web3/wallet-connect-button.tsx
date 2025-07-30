@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
-import { Check, Copy, ExternalLink, LogOut, Wallet, AlertTriangle, RefreshCw, Shield, Zap, Users, Trophy } from 'lucide-react';
+import { Check, Copy, ExternalLink, LogOut, Wallet, AlertTriangle, RefreshCw, Shield, Users, Trophy } from 'lucide-react';
 import { useAccount, useConnect, useDisconnect, useEnsName } from 'wagmi';
 import { 
   formatAddress, 
@@ -85,7 +85,7 @@ export function WalletConnectButton() {
     setCurrentNetwork(null);
   };
 
-  const handleConnect = async (connector: any) => {
+  const handleConnect = async (connector: (typeof connectors)[number]) => {
     try {
       await connect({ connector });
       setOpen(false);
@@ -163,7 +163,7 @@ export function WalletConnectButton() {
                     "w-full justify-start gap-4 py-4 px-4 text-left h-auto border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300",
                     !connector.ready && "opacity-50 cursor-not-allowed"
                   )}
-                  onClick={() => handleConnect(connector as any)}
+                  onClick={() => handleConnect(connector)}
                   disabled={!connector.ready || isPending}
                 >
                   <div className="relative">
@@ -178,16 +178,16 @@ export function WalletConnectButton() {
                         target.src = '/wallets/wallet.svg';
                       }}
                     />
-                    {connector.ready && (
+                    {connector.ready ? (
                       <div className="absolute -top-1 -right-1 h-3 w-3 bg-green-500 rounded-full border-2 border-background" />
-                    )}
+                    ) : null}
                   </div>
                   <div className="flex-1">
                     <div className="font-semibold text-base">
                       {connector.name}
-                      {!connector.ready && (
+                      {!connector.ready ? (
                         <span className="ml-2 text-xs text-muted-foreground font-normal">(Not Available)</span>
-                      )}
+                      ) : null}
                     </div>
                     <div className="text-sm text-muted-foreground mt-1">
                       {connector.name === 'MetaMask' && 'Most popular Web3 wallet'}
@@ -262,7 +262,7 @@ export function WalletConnectButton() {
                 Wallet Connected
               </DialogTitle>
               <DialogDescription className="text-base mt-2">
-                You're ready to start earning PRIME tokens with FitCast
+                You&apos;re ready to start earning PRIME tokens with FitCast
               </DialogDescription>
             </DialogHeader>
           </div>

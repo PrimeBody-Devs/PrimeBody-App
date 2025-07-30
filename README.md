@@ -1,8 +1,8 @@
 # FitCast Challenges - Landing Page
 
-Una landing page profesional para la Mini App de Farcaster que combina fitness con recompensas crypto reales.
+A professional landing page for the Farcaster Mini App that combines fitness with real crypto rewards.
 
-## 🚀 Características
+## 🚀 Features
 
 - **Next.js 14** con App Router y TypeScript
 - **Tailwind CSS** con design system personalizado
@@ -12,29 +12,29 @@ Una landing page profesional para la Mini App de Farcaster que combina fitness c
 - **SEO Optimizado** con meta tags completos
 - **Performance** optimizado para Lighthouse 90+
 
-## 🛠️ Stack Tecnológico
+## 🛠️ Tech Stack
 
 - **Framework**: Next.js 14
-- **Lenguaje**: TypeScript
+- **Language**: TypeScript
 - **Estilos**: Tailwind CSS
 - **Animaciones**: Framer Motion
 - **Temas**: next-themes
 - **Iconos**: Lucide React
 - **Linting**: ESLint + Prettier
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
 ```
 src/
 ├── app/                 # App Router (Next.js 14)
-├── components/          # Componentes React
+├── components/          # React Components
 │   ├── layout/         # Header, Footer, Navigation
 │   ├── sections/       # Hero, Features, Demo, CTA
 │   ├── ui/            # Button, Card, Modal
-│   └── icons/         # Iconos personalizados
-├── lib/               # Utilidades y configuración
-├── types/             # Tipos TypeScript
-└── styles/            # Estilos globales
+│   └── icons/         # Custom Icons
+├── lib/               # Utilities and Configuration
+├── types/             # TypeScript Types
+└── styles/            # Global Styles
 ```
 
 ## 🚀 Inicio Rápido
@@ -61,40 +61,40 @@ src/
    NEXT_PUBLIC_APP_URL=http://localhost:3000
    ```
 
-3. **Ejecutar en desarrollo**:
+3. **Run in development mode**:
    ```bash
    npm run dev
    ```
 
-4. **Abrir en el navegador**:
+4. **Open in browser**:
    ```
    http://localhost:3000
    ```
 
-## 📝 Scripts Disponibles
+## 📝 Available Scripts
 
-- `npm run dev` - Servidor de desarrollo
-- `npm run build` - Build de producción
-- `npm run start` - Servidor de producción
-- `npm run lint` - Ejecutar ESLint
-- `npm run lint:fix` - Corregir errores de ESLint
-- `npm run format` - Formatear código con Prettier
-- `npm run type-check` - Verificar tipos TypeScript
-- `npm run clean` - Limpiar archivos de build
+- `npm run dev` - Development server
+- `npm run build` - Production build
+- `npm run start` - Production server
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint errors
+- `npm run format` - Format code with Prettier
+- `npm run type-check` - Check TypeScript types
+- `npm run clean` - Clean build files
 
 ## 🎨 Design System
 
-### Colores
+### Colors
 - **Primary**: Azul (#3b82f6)
 - **Accent**: Verde (#10b981)
 - **Background**: Dinámico según tema
 - **Surface**: Superficies elevadas
 
-### Tipografía
+### Typography
 - **Font Family**: Inter (sans-serif)
 - **Scale**: 12px - 48px con line-heights optimizados
 
-### Espaciado
+### Spacing
 - **Sistema**: 4px base unit
 - **Breakpoints**: sm(640px), md(768px), lg(1024px), xl(1280px)
 
@@ -157,11 +157,49 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 ## 🚀 Deployment
 
+### Pre-deployment Checklist
+```bash
+# Run all checks before deploying
+npm run precommit      # Lint + type check
+npm run build          # Test production build
+npm run build:analyze  # Check bundle size
+npm run lighthouse     # Performance audit
+```
+
 ### Vercel (Recomendado)
+
+#### 1. Environment Variables
+Configure in Vercel Dashboard:
+```env
+NEXT_PUBLIC_APP_NAME=FitCast Challenges
+NEXT_PUBLIC_APP_URL=https://fitcast.app
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id
+```
+
+#### 2. Build Settings
+- Build Command: `npm run build`
+- Output Directory: `.next`
+- Install Command: `npm install`
+- Node.js Version: 18.x
+
+#### 3. Deploy
 ```bash
 npm run build
 vercel --prod
 ```
+
+### Performance Targets
+- Lighthouse Performance: 90+
+- Core Web Vitals: LCP < 2.5s, FID < 100ms, CLS < 0.1
+- Bundle Size: < 500KB total JS
+
+### Post-deployment
+- [ ] Verify all pages load correctly
+- [ ] Test Core Web Vitals
+- [ ] Check analytics tracking
+- [ ] Verify SEO meta tags
+- [ ] Test social media sharing
 
 ### Otros Proveedores
 ```bash

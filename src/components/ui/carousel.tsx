@@ -85,15 +85,17 @@ export function Carousel({ items, autoPlay = true, interval = 5000 }: CarouselPr
           <div key={item.id} className="w-full flex-shrink-0">
             <div className="relative aspect-video overflow-hidden rounded-xl bg-muted/50">
               <div className="relative w-full h-full">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 800px"
-                  className="object-cover"
-                  priority={index === 0} // Only preload first image
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 800px"
+                    className="object-cover"
+                    priority={index === 0} // Only preload first image
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </div>
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-6 flex flex-col justify-end">
                 <h3 className="text-xl font-bold text-white">{item.title}</h3>

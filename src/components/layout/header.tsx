@@ -15,10 +15,10 @@ interface HeaderProps {
 }
 
 const navigationLinks = [
-  { href: '/', label: 'Inicio' },
-  { href: '/desafios', label: 'Desafíos' },
-  { href: '/comunidad', label: 'Comunidad' },
-  { href: '/precios', label: 'Precios' },
+  { href: '/', label: 'Home' },
+  { href: '/challenges', label: 'Challenges' },
+  { href: '/community', label: 'Community' },
+  { href: '/pricing', label: 'Pricing' },
 ] as const;
 
 export function Header({ isScrolled: propIsScrolled, className }: HeaderProps) {
@@ -82,7 +82,7 @@ export function Header({ isScrolled: propIsScrolled, className }: HeaderProps) {
           <button
             onClick={toggleMobileMenu}
             className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-            aria-label="Abrir menú de navegación"
+            aria-label="Open navigation menu"
           >
             {isMobileMenuOpen ? (
               <X className="h-5 w-5" />
@@ -110,7 +110,7 @@ export function Header({ isScrolled: propIsScrolled, className }: HeaderProps) {
               {/* Mobile CTA */}
               <div className="px-3 pt-2">
                 <Button className="w-full font-medium" onClick={closeMobileMenu}>
-                  Comenzar Desafío
+                  Start Challenge
                 </Button>
               </div>
             </div>
