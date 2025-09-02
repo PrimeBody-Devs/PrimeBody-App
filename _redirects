@@ -1,0 +1,10 @@
+# Cloudflare Pages Redirects Configuration
+
+# Redirect /home to /
+/home /  301
+
+# SPA fallback for client-side routing
+/* /index.html 200
+
+# API routes should be handled by functions
+/api/* /api/* 200

@@ -1,0 +1,171 @@
+{
+  "name": "PrimeBody - Transforma tu Cuerpo con Recompensas Crypto",
+  "short_name": "PrimeBody",
+  "description": "Únete a desafíos fitness diarios, gana PRIME tokens y comparte tu progreso en Farcaster. La primera Mini App que combina fitness con Web3.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#0f172a",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "categories": ["health", "fitness", "lifestyle", "productivity", "social"],
+  "lang": "es",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon-120x120.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/screenshots/primebody-mobile-dashboard.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Dashboard principal de PrimeBody en móvil"
+    },
+    {
+      "src": "/images/screenshots/primebody-mobile-challenges.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Desafíos fitness disponibles"
+    },
+    {
+      "src": "/images/screenshots/primebody-mobile-rewards.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Sistema de recompensas PRIME tokens"
+    },
+    {
+      "src": "/images/screenshots/primebody-desktop-dashboard.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Dashboard completo de PrimeBody en desktop"
+    },
+    {
+      "src": "/images/screenshots/primebody-desktop-community.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Comunidad fitness Web3 en Farcaster"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Comenzar Desafío",
+      "short_name": "Desafío",
+      "description": "Inicia un nuevo desafío fitness y gana PRIME tokens",
+      "url": "/challenges?action=start",
+      "icons": [
+        {
+          "src": "/images/shortcuts/challenge-icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Mi Progreso",
+      "short_name": "Progreso",
+      "description": "Revisa tu transformación corporal y tokens ganados",
+      "url": "/dashboard?tab=progress",
+      "icons": [
+        {
+          "src": "/images/shortcuts/progress-icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Comunidad",
+      "short_name": "Comunidad",
+      "description": "Conecta con la comunidad fitness Web3 en Farcaster",
+      "url": "/community",
+      "icons": [
+        {
+          "src": "/images/shortcuts/community-icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "PRIME Tokens",
+      "short_name": "Tokens",
+      "description": "Gestiona tus recompensas PRIME tokens",
+      "url": "/rewards?tab=tokens",
+      "icons": [
+        {
+          "src": "/images/shortcuts/tokens-icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://warpcast.com/~/add-cast-action?url=https://primebody.pages.dev/api/frame"
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+primebody",
+      "url": "/handle?type=%s"
+    }
+  ]
+}

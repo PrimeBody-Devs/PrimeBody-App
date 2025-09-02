@@ -1,0 +1,32 @@
+# Cloudflare Pages Headers Configuration
+
+/*
+  # Security headers
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  
+  # Performance headers
+  Cache-Control: public, max-age=31536000, immutable
+
+/api/*
+  # API specific headers
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization
+  Cache-Control: no-cache, no-store, must-revalidate
+
+# Farcaster Frame specific headers
+/
+  # Frame meta tags headers
+  Content-Type: text/html; charset=utf-8
+  
+/api/frame
+  Content-Type: application/json
+  Cache-Control: no-cache
+  
+/api/frame/image
+  Content-Type: image/png
+  Cache-Control: public, max-age=3600

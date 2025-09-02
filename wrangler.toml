@@ -1,0 +1,25 @@
+name = "primebody-app"
+compatibility_date = "2024-08-31"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "primebody-app"
+
+[env.preview]
+name = "primebody-app-preview"
+
+# Pages configuration
+pages_build_output_dir = ".next"
+
+# Environment variables that will be available at build time
+[vars]
+NEXT_PUBLIC_APP_NAME = "PrimeBody"
+NEXT_PUBLIC_APP_URL = "https://primebody-app.pages.dev"
+
+# These will be set in Cloudflare dashboard
+# NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID = "your_project_id_here"
+# NEXT_PUBLIC_GA_ID = "your_ga_id_here"
+
+# Build configuration
+[[build.plugins]]
+name = "@cloudflare/next-on-pages"
