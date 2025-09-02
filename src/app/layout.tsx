@@ -28,7 +28,6 @@ export const metadata: Metadata = {
   category: SEO_CONFIG.category,
   applicationName: SEO_CONFIG.applicationName,
   referrer: SEO_CONFIG.referrer,
-  colorScheme: SEO_CONFIG.colorScheme,
   openGraph: {
     ...SEO_CONFIG.openGraph,
     images: [...SEO_CONFIG.openGraph.images],
@@ -88,7 +87,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://api.farcaster.xyz" />
         
         {/* Preload Critical Resources */}
-        <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/GeistVF.woff" as="font" type="font/woff" crossOrigin="anonymous" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="format-detection" content="telephone=no" />

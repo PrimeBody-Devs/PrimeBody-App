@@ -3,16 +3,14 @@ const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
   
-  // Enable SWC minification for better performance
-  swcMinify: true,
-  
   // Experimental features for better performance
   experimental: {
     // Enable modern JavaScript features
     esmExternals: true,
-    // Optimize server components
-    serverComponentsExternalPackages: [],
   },
+  
+  // Server external packages (moved from experimental)
+  serverExternalPackages: [],
 
   // Image optimization configuration
   images: {

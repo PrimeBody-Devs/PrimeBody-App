@@ -350,25 +350,25 @@ export default function Home() {
                     id: 1,
                     title: 'Dashboard Principal',
                     description: 'Visualiza tu progreso, PRIME tokens ganados y desafíos activos en tiempo real',
-                    image: '/images/carousel/primebody-dashboard.jpg',
+                    image: '/images/carousel/Ejercicio1.jpg',
                   },
                   {
                     id: 2,
                     title: 'Entrenamientos Personalizados',
                     description: 'Rutinas adaptadas por IA según tu nivel y objetivos de transformación corporal',
-                    image: '/images/carousel/primebody-workouts.jpg',
+                    image: '/images/carousel/Ejercicio2.jpg',
                   },
                   {
                     id: 3,
                     title: 'Recompensas PRIME',
                     description: 'Gana tokens verificables por cada entrenamiento completado y meta alcanzada',
-                    image: '/images/carousel/primebody-rewards.jpg',
+                    image: '/images/carousel/Ejercicio3.jpg',
                   },
                   {
                     id: 4,
                     title: 'Comunidad Farcaster',
                     description: 'Comparte logros, únete a desafíos y conecta con la comunidad fitness Web3',
-                    image: '/images/carousel/primebody-community.jpg',
+                    image: '/images/carousel/Ejercicio4.jpg',
                   },
                 ]}
                 autoPlay={true}
